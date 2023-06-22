@@ -1,40 +1,52 @@
 window.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    // Create a scene
-    const scene = new THREE.Scene();
+    // Create a scene, camera, renderer, and geometry as before
+    
+    // ...
 
-    // Create a camera
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
+    // Create a variable to store the mouse coordinates
+    var mouse = { x: 0, y: 0 };
 
-    // Create a renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById('globe').appendChild(renderer.domElement);
+    // Add event listeners for mouse movements
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('mouseup', handleMouseUp);
 
-    // Create a sphere geometry
-    const geometry = new THREE.SphereGeometry(2, 32, 32);
-
-    // Load a texture for the globe
-    const textureLoader = new THREE.TextureLoader();
-    const texture = textureLoader.load('earth_texture.jpg');
-
-    // Create a material with the texture
-    const material = new THREE.MeshBasicMaterial({ map: texture });
-
-    // Create a mesh with the geometry and material
-    const globe = new THREE.Mesh(geometry, material);
-
-    // Add the mesh to the scene
-    scene.add(globe);
-
-    // Render the scene
-    function render() {
-        requestAnimationFrame(render);
-        globe.rotation.y += 0.005;
-        renderer.render(scene, camera);
+    function handleMouseMove(event) {
+        // Update the mouse coordinates based on the mouse movement
+        mouse.x = event.clientX;
+        mouse.y = event.clientY;
     }
 
-    render();
+    function handleMouseDown(event) {
+        // Prevent default browser behavior to avoid text selection
+        event.preventDefault();
+
+        // Add event listener for mouse movement while dragging
+        document.addEventListener('mousemove', handleDrag);
+    }
+
+    function handleMouseUp(event) {
+        // Remove the event listener for mouse movement while dragging
+        document.removeEventListener('mousemove', handleDrag);
+    }
+
+    function handleDrag(event) {
+        // Calculate the distance moved by the mouse
+        var deltaX = event.clientX - mouse.x;
+        var deltaY = event.clientY - mouse.y;
+
+        // Update the globe's rotation based on the mouse movement
+        globe.rotation.y += deltaX * 0.01;
+        globe.rotation.x += deltaY * 0.01;
+
+        // Update the mouse coordinates
+        mouse.x = event.clientX;
+        mouse.y = event.clientY;
+    }
+
+    // Render the scene as before
+
+    // ...
 }
