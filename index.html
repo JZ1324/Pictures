@@ -26,10 +26,9 @@
             // Create a scene, camera, and renderer
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 15; // Adjust the camera position
-            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            const renderer = new THREE.WebGLRenderer();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            document.getElementById('globe').appendChild(renderer.domElement);
+            document.body.appendChild(renderer.domElement);
 
             // Create the geometry for the globe
             const geometry = new THREE.SphereGeometry(5, 32, 32);
@@ -40,7 +39,7 @@
 
             // Create variables for rotation
             const rotationSpeed = 0.005;
-            const idleRotation = { x: rotationSpeed, y: rotationSpeed };
+            const idleRotation = { x: rotationSpeed, y: rotationSpeed * Math.cos(23.5 * Math.PI / 180) };
 
             // Create a variable to track if the mouse is being dragged
             let isDragging = false;
@@ -65,7 +64,6 @@
                 // onError callback
                 (error) => {
                     console.error('An error occurred while loading the texture:', error);
-                    document.getElementById('progressBar').innerHTML = 'Error';
                 }
             );
 
@@ -126,12 +124,12 @@
                 prevMouse.x = mouse.x;
                 prevMouse.y = mouse.y;
 
-                // Render the scene with the camera
+                // Render the scene
                 renderer.render(scene, camera);
             }
 
             // Start the animation loop
-            animate();
+            // animate();  // Commented out to prevent rendering before texture is fully loaded
         });
     </script>
 </body>
