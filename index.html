@@ -68,7 +68,7 @@
             );
 
             // Create a material with the Earth texture
-            const material = new THREE.MeshStandardMaterial({ map: texture });
+            const material = new THREE.MeshBasicMaterial({ map: texture });
 
             // Create a mesh with the geometry and material
             const globe = new THREE.Mesh(geometry, material);
@@ -127,6 +127,9 @@
                 // Render the scene
                 renderer.render(scene, camera);
             }
+
+            // Set the camera position
+            camera.position.z = 15;
 
             // Start the animation loop
             // animate();  // Commented out to prevent rendering before texture is fully loaded
