@@ -39,7 +39,7 @@
 
             // Create variables for rotation
             const rotationSpeed = 0.005;
-            const idleRotation = { x: rotationSpeed, y: rotationSpeed * Math.cos(23.5 * Math.PI / 180) };
+            const idleRotation = { x: 0, y: -rotationSpeed * Math.cos(23.5 * Math.PI / 180) };
 
             // Create a variable to track if the mouse is being dragged
             let isDragging = false;
@@ -129,7 +129,7 @@
             }
 
             // Start the animation loop
-            // animate();  // Commented out to prevent rendering before texture is fully loaded
+            animate();
         });
     </script>
 </body>
