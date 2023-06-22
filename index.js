@@ -29,12 +29,6 @@ function init() {
     // Add the mesh to the scene
     scene.add(globe);
 
-    // Add event listeners for interaction
-    window.addEventListener('resize', handleResize);
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mousemove', handleMouseMove);
-
     // Render the scene
     function render() {
         requestAnimationFrame(render);
@@ -43,63 +37,4 @@ function init() {
     }
 
     render();
-
-    // Handle window resize
-    function handleResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    // Variables for mouse interaction
-    let isDragging = false;
-    let previousMousePosition = {
-        x: 0,
-        y: 0
-    };
-
-    // Handle mouse down event
-    function handleMouseDown(event) {
-        isDragging = true;
-        previousMousePosition = {
-            x: event.clientX,
-            y: event.clientY
-        };
-    }
-
-    // Handle mouse up event
-    function handleMouseUp() {
-        isDragging = false;
-    }
-
-    // Handle mouse move event
-    function handleMouseMove(event) {
-        if (!isDragging) {
-            return;
-        }
-
-        const { x, y } = event;
-
-        const deltaMove = {
-            x: x - previousMousePosition.x,
-            y: y - previousMousePosition.y
-        };
-
-        const deltaRotationQuaternion = new THREE.Quaternion()
-            .setFromEuler(new THREE.Euler(
-                toRadians(deltaMove.y * 1),
-                toRadians(deltaMove.x * 1),
-                0,
-                'XYZ'
-            ));
-
-        globe.quaternion.multiplyQuaternions(deltaRotationQuaternion, globe.quaternion);
-
-        previousMousePosition = { x, y };
-    }
-
-    // Helper function to convert degrees to radians
-    function toRadians(angle) {
-        return angle * (Math.PI / 180);
-    }
 }
