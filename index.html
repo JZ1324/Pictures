@@ -41,6 +41,9 @@
             const rotationSpeed = 0.005;
             const idleRotation = { x: rotationSpeed, y: rotationSpeed };
 
+            // Create a variable to track if the mouse is being dragged
+            let isDragging = false;
+
             // Load the Earth texture
             const textureLoader = new THREE.TextureLoader();
             const texture = textureLoader.load(
