@@ -47,7 +47,7 @@
             // Load the Earth texture
             const textureLoader = new THREE.TextureLoader();
             const texture = textureLoader.load(
-                'https://jz1324.github.io/Joe/earth_texture.jpg',
+                'https://jz1324.github.io/Earth/earth_texture.jpg',
                 // onLoad callback
                 () => {
                     document.getElementById('progressBar').style.width = '100%';
@@ -73,6 +73,12 @@
             // Create a mesh with the geometry and material
             const globe = new THREE.Mesh(geometry, material);
             scene.add(globe);
+
+            // Add stars in the background
+            const starGeometry = new THREE.SphereGeometry(1000, 64, 64);
+            const starMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.BackSide });
+            const stars = new THREE.Mesh(starGeometry, starMaterial);
+            scene.add(stars);
 
             // Add event listeners for mouse movements
             document.addEventListener('mousemove', handleMouseMove);
