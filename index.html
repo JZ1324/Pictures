@@ -39,7 +39,7 @@
 
             // Create variables for rotation
             const rotationSpeed = 0.005;
-            const idleRotation = { x: 0, y: rotationSpeed };
+            const idleRotation = { x: rotationSpeed, y: rotationSpeed * Math.cos(23.5 * Math.PI / 180) };
 
             // Create a variable to track if the mouse is being dragged
             let isDragging = false;
@@ -116,7 +116,8 @@
                     globe.rotation.x += deltaY * rotationSpeed;
                 } else {
                     // Apply idle rotation when not dragging
-                    globe.rotation.z += idleRotation.y;
+                    globe.rotation.y += idleRotation.x;
+                    globe.rotation.x += idleRotation.y;
                 }
 
                 // Update the previous mouse position
