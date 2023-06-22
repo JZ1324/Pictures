@@ -39,8 +39,7 @@
 
             // Create variables for rotation
             const rotationSpeed = 0.005;
-            const axialTilt = 23.5 * Math.PI / 180;
-            const idleRotation = { x: rotationSpeed, y: rotationSpeed * Math.cos(axialTilt) };
+            const idleRotation = { x: rotationSpeed, y: rotationSpeed * Math.cos(23.5 * Math.PI / 180) };
 
             // Create a variable to track if the mouse is being dragged
             let isDragging = false;
@@ -48,7 +47,7 @@
             // Load the Earth texture
             const textureLoader = new THREE.TextureLoader();
             const texture = textureLoader.load(
-                'https://jz1324.github.io/Earth/earth_texture.jpg',
+                'https://jz1324.github.io/Joe/earth_texture.jpg',
                 // onLoad callback
                 () => {
                     document.getElementById('progressBar').style.width = '100%';
@@ -117,8 +116,8 @@
                     globe.rotation.x += deltaY * rotationSpeed;
                 } else {
                     // Apply idle rotation when not dragging
-                    globe.rotation.y -= idleRotation.x;  // Change to counter-clockwise rotation
-                    globe.rotation.x -= idleRotation.y;  // Change to counter-clockwise rotation
+                    globe.rotation.y += idleRotation.x;
+                    globe.rotation.x += idleRotation.y;
                 }
 
                 // Update the previous mouse position
