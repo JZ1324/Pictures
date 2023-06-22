@@ -7,7 +7,7 @@
             width: 500px;
             height: 500px;
         }
-
+        
         .progress {
             width: 200px;
             margin: 10px;
@@ -47,7 +47,7 @@
             // Load the Earth texture
             const textureLoader = new THREE.TextureLoader();
             const texture = textureLoader.load(
-                'https://jz1324.github.io/Earth/earth_texture.jpg',
+                'https://jz1324.github.io/Joe/earth_texture.jpg',
                 // onLoad callback
                 () => {
                     document.getElementById('progressBar').style.width = '100%';
@@ -67,36 +67,12 @@
                 }
             );
 
-            // Load the starfield texture
-            const starfieldTexture = textureLoader.load(
-                'https://jz1324.github.io/Earth/galaxy_starfield.jpg',
-                // onLoad callback
-                () => {
-                    // Render the scene after both textures are loaded
-                    renderScene();
-                },
-                // onProgress callback
-                (xhr) => {
-                    // You can handle the progress of the starfield texture loading here if needed
-                },
-                // onError callback
-                (error) => {
-                    console.error('An error occurred while loading the starfield texture:', error);
-                }
-            );
-
             // Create a material with the Earth texture
             const material = new THREE.MeshBasicMaterial({ map: texture });
 
             // Create a mesh with the geometry and material
             const globe = new THREE.Mesh(geometry, material);
             scene.add(globe);
-
-            // Create the starfield background
-            const starfieldMaterial = new THREE.MeshBasicMaterial({ map: starfieldTexture, side: THREE.BackSide });
-            const starfieldGeometry = new THREE.SphereGeometry(1000, 32, 32);
-            const starfield = new THREE.Mesh(starfieldGeometry, starfieldMaterial);
-            scene.add(starfield);
 
             // Add event listeners for mouse movements
             document.addEventListener('mousemove', handleMouseMove);
@@ -149,16 +125,14 @@
                 prevMouse.y = mouse.y;
 
                 // Render the scene
-                renderScene();
-            }
-
-            // Function to render the scene
-            function renderScene() {
                 renderer.render(scene, camera);
             }
 
+            // Set the camera position
+            camera.position.z = 15;
+
             // Start the animation loop
-            // animate();  // Commented out to prevent rendering before textures are fully loaded
+            // animate();  // Commented out to prevent rendering before texture is fully loaded
         });
     </script>
 </body>
