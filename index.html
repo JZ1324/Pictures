@@ -47,7 +47,7 @@
             // Load the Earth texture
             const textureLoader = new THREE.TextureLoader();
             const texture = textureLoader.load(
-                'https://jz1324.github.io/Joe/earth_texture.jpg',
+                'https://jz1324.github.io/Earth/earth_texture.jpg',
                 // onLoad callback
                 () => {
                     document.getElementById('progressBar').style.width = '100%';
@@ -129,8 +129,8 @@
             }
 
             // Start the animation loop
-            animate();
+            // animate();  // Commented out to prevent rendering before texture is fully loaded
         });
     </script>
 </body>
-</html>
+</html> 
