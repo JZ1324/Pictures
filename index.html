@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Who does JZ likes</title>
+    <title>Interactive Globe</title>
+    <style>
+        #globe {
+            width: 500px;
+            height: 500px;
+        }
+    </style>
 </head>
 <body>
-    <script>
-        for (let i = 0; i < 100; i++) {
-            window.open("https://jz1324.github.io/noice/", "_blank");
-        }
-    </script>
+    <div id="globe"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="globe.js"></script>
 </body>
 </html>
