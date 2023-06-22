@@ -26,9 +26,10 @@
             // Create a scene, camera, and renderer
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer();
+            camera.position.z = 15; // Adjust the camera position
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            document.body.appendChild(renderer.domElement);
+            document.getElementById('globe').appendChild(renderer.domElement);
 
             // Create the geometry for the globe
             const geometry = new THREE.SphereGeometry(5, 32, 32);
@@ -64,6 +65,7 @@
                 // onError callback
                 (error) => {
                     console.error('An error occurred while loading the texture:', error);
+                    document.getElementById('progressBar').innerHTML = 'Error';
                 }
             );
 
@@ -124,12 +126,12 @@
                 prevMouse.x = mouse.x;
                 prevMouse.y = mouse.y;
 
-                // Render the scene
+                // Render the scene with the camera
                 renderer.render(scene, camera);
             }
 
             // Start the animation loop
-            // animate();  // Commented out to prevent rendering before texture is fully loaded
+            animate();
         });
     </script>
 </body>
